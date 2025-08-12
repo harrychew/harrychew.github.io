@@ -118,56 +118,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const industriesTrigger = document.getElementById('industries-trigger');
     const closeBtn = document.querySelector('.close');
 
-    console.log('🔍 Modal Debug Info:');
-    console.log('Modal element:', modal);
-    console.log('Industries trigger:', industriesTrigger);
-    console.log('Close button:', closeBtn);
-
     // Open modal when clicking on industries number
     if (industriesTrigger && modal) {
-        console.log('✅ Modal and trigger found, adding click listener');
         industriesTrigger.addEventListener('click', () => {
-            console.log('🎯 Industries trigger clicked!');
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            console.log('📱 Modal display set to:', modal.style.display);
         });
-    } else {
-        console.log('❌ Modal or trigger not found!');
-        console.log('Modal exists:', !!modal);
-        console.log('Trigger exists:', !!industriesTrigger);
     }
-
-    // Test modal functionality after a short delay
-    setTimeout(() => {
-        console.log('🧪 Testing modal functionality...');
-        if (modal && industriesTrigger) {
-            console.log('✅ Modal test: Elements found after delay');
-            // Test if we can programmatically show the modal
-            modal.style.display = 'block';
-            modal.style.zIndex = '9999'; // Ensure it's on top
-            console.log('📱 Modal display set to block for testing');
-            console.log('📱 Modal z-index set to:', modal.style.zIndex);
-            setTimeout(() => {
-                modal.style.display = 'none';
-                console.log('📱 Modal display set back to none');
-            }, 2000);
-        } else {
-            console.log('❌ Modal test: Elements still not found after delay');
-        }
-    }, 1000);
 
     // Close modal when clicking on X
     if (closeBtn && modal) {
-        console.log('✅ Close button found, adding click listener');
         closeBtn.addEventListener('click', () => {
-            console.log('❌ Close button clicked!');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto'; // Restore scrolling
-            console.log('📱 Modal display set to:', modal.style.display);
         });
-    } else {
-        console.log('❌ Close button not found!');
     }
 
     // Close modal when clicking outside of it
@@ -194,11 +158,9 @@ function initializeModal() {
     const closeBtn = document.querySelector('.close');
 
     if (modal && industriesTrigger && !industriesTrigger.hasAttribute('data-initialized')) {
-        console.log('🔄 Fallback modal initialization');
         industriesTrigger.setAttribute('data-initialized', 'true');
         
         industriesTrigger.addEventListener('click', () => {
-            console.log('🎯 Fallback: Industries trigger clicked!');
             modal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         });
@@ -213,7 +175,6 @@ setTimeout(initializeModal, 1000);
 // Global click handler as ultimate fallback
 document.addEventListener('click', (event) => {
     if (event.target && event.target.id === 'industries-trigger') {
-        console.log('🌐 Global click handler: Industries trigger clicked!');
         const modal = document.getElementById('industries-modal');
         if (modal) {
             modal.style.display = 'block';
@@ -248,10 +209,10 @@ if (contactForm) {
         
         // Get form data
         const formData = new FormData(contactForm);
-        const name = contactForm.querySelector('input[type="text"]').value;
-        const email = contactForm.querySelector('input[type="email"]').value;
-        const subject = contactForm.querySelector('input[placeholder="Subject"]').value;
-        const message = contactForm.querySelector('textarea').value;
+        const name = contactForm.querySelector('#contact-name').value;
+        const email = contactForm.querySelector('#contact-email').value;
+        const subject = contactForm.querySelector('#contact-subject').value;
+        const message = contactForm.querySelector('#contact-message').value;
         
         // Simple validation
         if (!name || !email || !subject || !message) {
@@ -413,7 +374,9 @@ style.textContent = `
         }
     }
 `;
-document.head.appendChild(style);
+if (document.head) {
+    document.head.appendChild(style);
+}
 
 // Lazy loading for images (if any are added later)
 const lazyImages = document.querySelectorAll('img[data-src]');
@@ -476,7 +439,9 @@ loadingStyle.textContent = `
         100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
 `;
-document.head.appendChild(loadingStyle);
+if (document.head) {
+    document.head.appendChild(loadingStyle);
+}
 
 // Add scroll to top functionality
 const scrollToTopBtn = document.createElement('button');
