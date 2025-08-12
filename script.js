@@ -112,6 +112,59 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Industries Modal Functionality
+const modal = document.getElementById('industries-modal');
+const industriesTrigger = document.getElementById('industries-trigger');
+const closeBtn = document.querySelector('.close');
+
+// Open modal when clicking on industries number
+if (industriesTrigger) {
+    industriesTrigger.addEventListener('click', () => {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    });
+}
+
+// Close modal when clicking on X
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+}
+
+// Close modal when clicking outside of it
+window.addEventListener('click', (event) => {
+    if (event.target === modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.style.display === 'block') {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+});
+
+// Certifications Trigger Functionality
+const certificationsTrigger = document.getElementById('certifications-trigger');
+
+// Scroll to certifications section when clicking on certifications number
+if (certificationsTrigger) {
+    certificationsTrigger.addEventListener('click', () => {
+        const certificationsSection = document.getElementById('certifications');
+        if (certificationsSection) {
+            certificationsSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+}
+
 // Form submission handling
 const contactForm = document.querySelector('.contact-form form');
 if (contactForm) {

@@ -270,6 +270,183 @@ body {
     color: var(--text-secondary);
 }
 
+.industry-logos {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.industry-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.industry-item:hover {
+    background: rgba(233, 69, 96, 0.1);
+    transform: translateX(5px);
+}
+
+.industry-item i {
+    font-size: 1.2rem;
+    color: var(--highlight-color);
+    width: 20px;
+    text-align: center;
+}
+
+.industry-item span {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: var(--shadow-hover);
+    border: 1px solid var(--border-color);
+    animation: slideIn 0.3s ease;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+    color: var(--highlight-color);
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.close {
+    color: var(--text-secondary);
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    line-height: 1;
+}
+
+.close:hover {
+    color: var(--highlight-color);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.industry-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.industry-list .industry-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: rgba(233, 69, 96, 0.05);
+    border: 1px solid rgba(233, 69, 96, 0.1);
+    transition: all 0.3s ease;
+}
+
+.industry-list .industry-item:hover {
+    background: rgba(233, 69, 96, 0.1);
+    transform: translateX(5px);
+    border-color: rgba(233, 69, 96, 0.2);
+}
+
+.industry-list .industry-item i {
+    font-size: 1.5rem;
+    color: var(--highlight-color);
+    width: 30px;
+    text-align: center;
+    margin-top: 0.25rem;
+}
+
+.industry-info h4 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.industry-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Modal Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Make industries trigger clickable */
+#industries-trigger {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#industries-trigger:hover {
+    color: var(--text-primary);
+    transform: scale(1.1);
+}
+
+/* Make certifications trigger clickable */
+#certifications-trigger {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#certifications-trigger:hover {
+    color: var(--text-primary);
+    transform: scale(1.1);
+}
+
 /* Section Styles */
 .section-title {
     font-size: 2.5rem;
