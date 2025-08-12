@@ -598,7 +598,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form action="https://formspree.io/f/xpwlbrln" method="POST" id="contact-form">
                         <div class="form-group">
                             <input type="text" id="contact-name" name="name" placeholder="Your Name" required>
                         </div>
@@ -611,7 +611,12 @@
                         <div class="form-group">
                             <textarea id="contact-message" name="message" placeholder="Your Message" rows="5" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </span>
+                        </button>
                     </form>
                 </div>
             </div>
