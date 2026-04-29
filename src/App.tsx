@@ -217,7 +217,7 @@ const HeroSection = () => {
             <p className="font-mono text-xs text-cyber-gray mt-1">YEARS EXP</p>
           </div>
           <div className="text-center">
-            <p className="font-heading text-3xl md:text-4xl text-accent">6</p>
+            <p className="font-heading text-3xl md:text-4xl text-accent">7</p>
             <p className="font-mono text-xs text-cyber-gray mt-1">CERTIFICATIONS</p>
           </div>
           <div className="text-center">
