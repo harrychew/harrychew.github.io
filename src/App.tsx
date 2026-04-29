@@ -376,7 +376,7 @@ const ExperienceSection = () => {
       subtitle: 'Assistant Manager',
       company: 'Sunway Shared Services Sdn. Bhd.',
       period: 'Aug 2024 – Present',
-      location: 'Kuala Lumpur, Malaysia',
+      location: 'Selangor, Malaysia',
       description: 'Lead comprehensive VAPT initiatives, manage penetration testing team, oversee security testing projects, and conduct external client engagements.',
       achievements: [
         'Managed RM630K+ in security projects',
@@ -419,7 +419,7 @@ const ExperienceSection = () => {
       subtitle: '',
       company: 'LGMS – LE Global Services Sdn Bhd',
       period: 'May 2019 – Aug 2019',
-      location: 'Malaysia',
+      location: 'Kuala Lumpur, Malaysia',
       description: 'Assisted in vulnerability assessments and documentation for compliance engagements.',
       achievements: [
         'Conducted web application security assessments',
