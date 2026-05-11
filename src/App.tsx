@@ -213,7 +213,7 @@ const HeroSection = () => {
       >
         <div className="max-w-4xl mx-auto flex justify-center gap-8 md:gap-16">
           <div className="text-center">
-            <p className="font-heading text-3xl md:text-4xl text-accent">4+</p>
+            <p className="font-heading text-3xl md:text-4xl text-accent">5+</p>
             <p className="font-mono text-xs text-cyber-gray mt-1">YEARS EXP</p>
           </div>
           <div className="text-center">
