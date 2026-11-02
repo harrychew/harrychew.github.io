@@ -164,7 +164,7 @@ const Hero = () => (
       <Prompt>$ whoami</Prompt>
       <h1 className="text-[clamp(40px,6.2vw,68px)] leading-[1.05]">Security leadership, built from the keyboard up.</h1>
       <p className="mt-6 max-w-[600px] text-[21px] text-console-soft">
-        Chew Yong Shan, Harry. Six years across SOC operations, consulting and penetration testing, now managing the testing team at Sunway.
+        Harry Chew. Six years across SOC operations, consulting and penetration testing, now managing the testing team at Sunway.
       </p>
       <div className="mt-8 flex flex-wrap gap-3">
         <a href="#contact" className="inline-flex min-h-12 items-center bg-console-amber px-6 font-semibold text-console-bg no-underline hover:bg-console-glow">
