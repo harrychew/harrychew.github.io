@@ -15,6 +15,15 @@ const stats = [
   { value: '13+', label: 'business divisions in testing scope' },
 ];
 
+const certifications = [
+  { code: 'OSWP', issuer: 'OffSec', badge: '/badges/oswp.png', plate: 'bg-white' },
+  { code: 'CARTP', issuer: 'Altered Security', badge: '/badges/cartp.png', plate: 'bg-console-bg' },
+  { code: 'CRTP', issuer: 'Altered Security', badge: '/badges/crtp.png', plate: 'bg-console-bg' },
+  { code: 'OSCP', issuer: 'OffSec', badge: '/badges/oscp.png', plate: 'bg-white' },
+  { code: 'PNPT', issuer: 'TCM Security', badge: '/badges/pnpt.png', plate: 'bg-console-bg' },
+  { code: 'eCIR', issuer: 'INE Security', badge: '/badges/ecir.png', plate: 'bg-[#121212]' },
+];
+
 const roles = [
   {
     lens: 'OFFENCE',
@@ -196,6 +205,31 @@ const Stats = () => (
         <p className="mt-1.5 text-[15px] text-console-muted">{stat.label}</p>
       </div>
     ))}
+  </section>
+);
+
+const CertificationCards = () => (
+  <>
+    {certifications.map((certification) => (
+      <li key={certification.code} className="flex w-[204px] shrink-0 items-center gap-3 border border-console-line bg-console-panel p-2.5 pr-4">
+        <span className={`h-16 w-[72px] shrink-0 overflow-hidden ${certification.plate}`}>
+          <img src={certification.badge} alt={`${certification.code} badge`} className="block h-full w-full object-contain" />
+        </span>
+        <span className="min-w-0">
+          <span className="block font-mono font-semibold leading-tight">{certification.code}</span>
+          <span className="block truncate text-[13px] text-console-muted">{certification.issuer}</span>
+        </span>
+      </li>
+    ))}
+  </>
+);
+
+const CertificationTrain = () => (
+  <section aria-label="Certifications" className="cert-train-window mt-10 overflow-hidden">
+    <div className="cert-train flex w-max">
+      <ul className="m-0 flex list-none gap-3 p-0 pr-3"><CertificationCards /></ul>
+      <ul aria-hidden="true" className="cert-train-copy m-0 flex list-none gap-3 p-0 pr-3"><CertificationCards /></ul>
+    </div>
   </section>
 );
 
@@ -447,6 +481,7 @@ function App() {
       <main id="top" className="mx-auto max-w-[1180px] px-6">
         <Hero />
         <Stats />
+        <CertificationTrain />
         <Career />
         <Impact />
         <Value />

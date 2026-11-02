@@ -236,3 +236,39 @@
     }
   }
 }
+
+@layer components {
+  .cert-train {
+    animation: cert-train 36s linear infinite;
+  }
+
+  .cert-train-window:hover .cert-train {
+    animation-play-state: paused;
+  }
+
+  @keyframes cert-train {
+    from {
+      transform: translateX(-50%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cert-train {
+      animation: none;
+      width: auto;
+    }
+
+    .cert-train ul:first-child {
+      flex-wrap: wrap;
+      padding-right: 0;
+    }
+
+    .cert-train-copy {
+      display: none;
+    }
+  }
+}
