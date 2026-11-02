@@ -9,19 +9,13 @@ A high-tech, futuristic personal portfolio and resume website for a cybersecurit
 
 ## 🎨 Design Overview
 
-**Visual Style:** Neon-noir, high-tech, cinematic, grid-based, futuristic  
+**Visual Style:** Dark console with restrained terminal details
 **Color Palette:**
-- Background: `#05060B` (deep space black)
-- Accent: `#39FF14` (neon green)
-- Text: `#F2F5F9` (near-white)
+- Background: `#0B0F14`
+- Accent: `#F5B544` (amber)
+- Text: `#E6EAF0`
 
-**Key Features:**
-- Persistent HUD corner frames with pulse animation
-- Animated particle background
-- Scanline overlay texture
-- Grid drift animation
-- Neon glow effects on hover
-- Fully responsive (desktop, tablet, mobile)
+**Fonts:** Geist and Geist Mono
 
 ---
 
@@ -57,7 +51,6 @@ my-app/
 │   └── CNAME                     # Custom domain config
 ├── src/
 │   ├── App.tsx                   # Main app with all sections
-│   ├── App.css                   # Component-specific styles
 │   ├── index.css                 # Global styles & Tailwind
 │   ├── main.tsx                  # Entry point
 │   └── sections/                 # (for future section splitting)
@@ -73,61 +66,13 @@ my-app/
 
 ## 📄 Sections
 
-### 1. Hero
-- Full-screen intro with animated crosshair
-- "SECURE THE FUTURE / BREAK THE THREAT" headline
-- Quick stats: 6+ years, 7 certifications, 50+ projects
-- CTAs: View Experience, Contact Me
-
-### 2. Profile
-- Professional photo with cyber-noir border frame
-- Bio and quick stats (location, experience, focus, availability)
-- Social links (LinkedIn, GitHub)
-
-### 3. Experience Timeline
-Chronological career history:
-- **Senior Analyst – Cybersecurity** (Assistant Manager)  
-  *Sunway Shared Services* · Aug 2024 – Present
-- **Senior Associate – Cybersecurity**  
-  *PwC (PricewaterhouseCoopers)* · Jan 2023 – Jul 2024
-- **Specialist Cyber Security** (SOC Analyst L1)  
-  *Infineon Technologies* · Oct 2020 – Dec 2022
-- **Intern – IT Security**  
-  *LGMS – LE Global Services* · May 2019 – Aug 2019
-
-### 4. Skills Matrix
-Three categories with skill tags:
-- **Offensive Security:** Penetration Testing, Web/Mobile Testing, Network Exploitation, etc.
-- **Defensive Operations:** Incident Response, SIEM, Threat Hunting, Digital Forensics, etc.
-- **Cloud & Automation:** AWS/Azure Security, Python/Bash, CI/CD Security, etc.
-- **Technologies & Tools:** 24+ tools listed
-
-### 5. Certifications
-7 industry-recognized certifications with:
-- Company logos (OffSec, Altered Security, TCM Security, etc.)
-- Credential IDs
-- Direct verification links to official credential pages
-
-| Cert | Issuer | Year |
-|---|---|---|
-| OSWP | OffSec | Feb 2026 |
-| CARTP | Altered Security | Jul 2025 |
-| CAPv2 | The SecOps Group | Nov 2024 |
-| CRTP | Altered Security | Oct 2024 |
-| OSCP | OffSec | Mar 2024 |
-| PNPT | TCM Security | Jun 2023 |
-| eCIR | INE Security | Oct 2021 |
-
-### 6. Projects
-Three project showcases with AI-generated imagery:
-- CloudSec Assessment Toolkit
-- Phishing Simulation Platform
-- Detection Rule Library
-
-### 7. Contact & Footer
-- Contact form (Name, Email, Subject, Message)
-- Direct contact links (Email, LinkedIn, GitHub, Location)
-- Footer with copyright and resume PDF link
+1. **Hero:** headline, intro and portrait
+2. **Results:** headline numbers
+3. **Career:** offence, advisory and defence roles
+4. **Impact:** interactive map from capability to credentials, skills and results
+5. **Value:** what I want to bring, with proof
+6. **Background:** education, research, international work and interests
+7. **Contact:** links and a form sent through Formspree
 
 ---
 
@@ -203,20 +148,14 @@ This repository is **safe for public hosting**. It contains:
 
 ## 📝 Customization Guide
 
-### Update Experience
-Edit `src/App.tsx` — find the `experiences` array in `ExperienceSection`.
-
-### Update Certifications
-Edit `src/App.tsx` — find the `certifications` array in `CertificationsSection`.
-
-### Update Skills
-Edit `src/App.tsx` — find the `skillCategories` array in `SkillsSection`.
+### Update Content
+Edit the `stats`, `roles`, `capabilities` and `values` arrays at the top of `src/App.tsx`.
 
 ### Update Profile Photo
 Replace `public/profile-portrait.jpg` with your new photo (keep same filename).
 
 ### Update Contact Info
-Edit the `contactInfo` array in `ContactSection` within `src/App.tsx`.
+Edit the `EMAIL`, `LINKEDIN_URL` and `GITHUB_URL` constants at the top of `src/App.tsx`.
 
 ---
 

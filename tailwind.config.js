@@ -5,6 +5,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        console: {
+          bg: "#0B0F14",
+          panel: "#121820",
+          raised: "#17202B",
+          line: "#2A333D",
+          edge: "#5B6875",
+          text: "#E6EAF0",
+          soft: "#C4CDD7",
+          muted: "#AEB8C4",
+          amber: "#F5B544",
+          glow: "#FFD58A",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -49,9 +61,7 @@ module.exports = {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        heading: ['Space Grotesk', 'sans-serif'],
-        mono: ['IBM Plex Mono', 'monospace'],
+        mono: ['"Geist Mono"', 'monospace'],
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",
