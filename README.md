@@ -72,7 +72,7 @@ my-app/
 4. **Impact:** interactive map from capability to credentials, skills and results
 5. **Value:** what I want to bring, with proof
 6. **Background:** education, research, international work and interests
-7. **Contact:** links and a form sent through Formspree
+7. **Contact:** email, LinkedIn and GitHub links
 
 ---
 

@@ -8,7 +8,6 @@ const CONTENT_SECURITY_POLICY = [
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src https://fonts.gstatic.com",
   "img-src 'self' data:",
-  "connect-src https://formspree.io",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'none'",

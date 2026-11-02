@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { Send } from 'lucide-react';
 
-const FORM_ENDPOINT = 'https://formspree.io/f/xpwlbrln';
 const EMAIL = 'chewys96@gmail.com';
 const LINKEDIN_URL = 'https://www.linkedin.com/in/harry-chew-023b5aaa/';
 const GITHUB_URL = 'https://github.com/harrychew';
@@ -375,104 +373,16 @@ const Background = () => (
   </section>
 );
 
-const fieldClass = 'w-full border border-console-edge bg-console-bg px-4 py-3 text-console-text placeholder:text-console-muted focus:border-console-amber focus:outline-none';
-const labelClass = 'mb-2 block font-mono text-[13px] text-console-muted';
-
-const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
-
-  const updateField = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    setStatus('sending');
-
-    try {
-      const response = await fetch(FORM_ENDPOINT, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { Accept: 'application/json' },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to send message');
-      }
-
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      form.reset();
-      setStatus('sent');
-      setTimeout(() => setStatus('idle'), 3000);
-    } catch {
-      setStatus('error');
-    }
-  };
-
-  return (
-    <section id="contact" className="mt-20 scroll-mt-24 border-t border-console-line pb-16 pt-10">
-      <div className="grid gap-12 lg:grid-cols-2">
-        <div>
-          <h2 className="text-[clamp(30px,4.6vw,46px)] leading-[1.12]">Let's talk about your security programme.</h2>
-          <div className="mt-5 flex flex-wrap gap-x-8 gap-y-2 font-mono">
-            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">linkedin</a>
-            <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">github</a>
-          </div>
-        </div>
-
-        <form onSubmit={handleSubmit} className="border border-console-line bg-console-panel p-6">
-          {/* Honeypot: hidden from visitors, Formspree drops submissions that fill it */}
-          <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
-
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="contact-name" className={labelClass}>NAME</label>
-              <input id="contact-name" type="text" name="name" value={formData.name} onChange={updateField} className={fieldClass} placeholder="Your name" required />
-            </div>
-            <div>
-              <label htmlFor="contact-email" className={labelClass}>EMAIL</label>
-              <input id="contact-email" type="email" name="email" value={formData.email} onChange={updateField} className={fieldClass} placeholder="your@email.com" required />
-            </div>
-            <div>
-              <label htmlFor="contact-subject" className={labelClass}>SUBJECT</label>
-              <input id="contact-subject" type="text" name="subject" value={formData.subject} onChange={updateField} className={fieldClass} placeholder="How can I help?" required />
-            </div>
-            <div>
-              <label htmlFor="contact-message" className={labelClass}>MESSAGE</label>
-              <textarea id="contact-message" name="message" value={formData.message} onChange={updateField} className={`${fieldClass} h-32 resize-none`} placeholder="Tell me about the work" required />
-            </div>
-
-            <button
-              type="submit"
-              disabled={status === 'sending'}
-              className="flex min-h-12 w-full items-center justify-center gap-2 bg-console-amber px-6 font-semibold text-console-bg hover:bg-console-glow disabled:opacity-70"
-            >
-              {status === 'sent' ? (
-                <>MESSAGE SENT</>
-              ) : status === 'sending' ? (
-                <>SENDING...</>
-              ) : (
-                <>
-                  <Send className="h-4 w-4" aria-hidden="true" />
-                  SEND MESSAGE
-                </>
-              )}
-            </button>
-
-            {status === 'error' && (
-              <p role="alert" className="text-sm text-console-soft">
-                Message failed to send. Please email <a href={`mailto:${EMAIL}`}>{EMAIL}</a> directly.
-              </p>
-            )}
-          </div>
-        </form>
-      </div>
-    </section>
-  );
-};
+const Contact = () => (
+  <section id="contact" className="mt-20 scroll-mt-24 border-t border-console-line pb-16 pt-10">
+    <h2 className="text-[clamp(30px,4.6vw,46px)] leading-[1.12]">Let's talk about your security programme.</h2>
+    <div className="mt-5 flex flex-wrap gap-x-8 gap-y-2 font-mono">
+      <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">linkedin</a>
+      <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">github</a>
+    </div>
+  </section>
+);
 
 function App() {
   return (
