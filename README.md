@@ -76,7 +76,7 @@ my-app/
 ### 1. Hero
 - Full-screen intro with animated crosshair
 - "SECURE THE FUTURE / BREAK THE THREAT" headline
-- Quick stats: 4+ years, 7 certifications, 50+ projects
+- Quick stats: 6+ years, 7 certifications, 50+ projects
 - CTAs: View Experience, Contact Me
 
 ### 2. Profile
