@@ -128,7 +128,7 @@ const Navigation = () => {
             <a href="https://github.com/harrychew" target="_blank" rel="noopener noreferrer" className="text-cyber-gray hover:text-accent transition-colors">
               <Github className="w-5 h-5" />
             </a>
-            <a href="mailto:hello@harrychew.dev" className="text-cyber-gray hover:text-accent transition-colors">
+            <a href="mailto:chewys96@gmail.com" className="text-cyber-gray hover:text-accent transition-colors">
               <Mail className="w-5 h-5" />
             </a>
           </div>
@@ -898,11 +898,13 @@ const ProjectsSection = () => {
 };
 
 // Contact Section
+const FORM_ENDPOINT = 'https://formspree.io/f/xpwlbrln';
+
 const ContactSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -922,10 +924,29 @@ const ContactSection = () => {
     return () => observer.disconnect();
   }, []);
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    const form = e.currentTarget;
+    setStatus('sending');
+    
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+      
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      form.reset();
+      setStatus('sent');
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch {
+      setStatus('error');
+    }
   };
   
   const contactInfo = [
@@ -985,11 +1006,15 @@ const ContactSection = () => {
               <form onSubmit={handleSubmit} className="border border-accent/20 bg-accent/5 p-6 md:p-8">
                 <h3 className="font-heading text-xl text-cyber-white mb-6">SEND MESSAGE</h3>
                 
+                {/* Honeypot: hidden from visitors, Formspree drops submissions that fill it */}
+                <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                
                 <div className="space-y-4">
                   <div>
                     <label className="font-mono text-xs text-cyber-gray mb-2 block">NAME</label>
                     <input
                       type="text"
+                      name="name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-cyber-black border border-accent/30 px-4 py-3 text-cyber-white input-cyber transition-all duration-300"
@@ -1002,6 +1027,7 @@ const ContactSection = () => {
                     <label className="font-mono text-xs text-cyber-gray mb-2 block">EMAIL</label>
                     <input
                       type="email"
+                      name="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-cyber-black border border-accent/30 px-4 py-3 text-cyber-white input-cyber transition-all duration-300"
@@ -1014,6 +1040,7 @@ const ContactSection = () => {
                     <label className="font-mono text-xs text-cyber-gray mb-2 block">SUBJECT</label>
                     <input
                       type="text"
+                      name="subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       className="w-full bg-cyber-black border border-accent/30 px-4 py-3 text-cyber-white input-cyber transition-all duration-300"
@@ -1025,6 +1052,7 @@ const ContactSection = () => {
                   <div>
                     <label className="font-mono text-xs text-cyber-gray mb-2 block">MESSAGE</label>
                     <textarea
+                      name="message"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       className="w-full bg-cyber-black border border-accent/30 px-4 py-3 text-cyber-white input-cyber transition-all duration-300 h-32 resize-none"
@@ -1035,10 +1063,13 @@ const ContactSection = () => {
                   
                   <button
                     type="submit"
+                    disabled={status === 'sending'}
                     className="w-full btn-primary flex items-center justify-center gap-2 mt-6"
                   >
-                    {submitted ? (
+                    {status === 'sent' ? (
                       <>MESSAGE SENT</>
+                    ) : status === 'sending' ? (
+                      <>SENDING...</>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
@@ -1046,6 +1077,13 @@ const ContactSection = () => {
                       </>
                     )}
                   </button>
+                  
+                  {status === 'error' && (
+                    <p role="alert" className="text-sm text-cyber-gray">
+                      Message failed to send. Please email{' '}
+                      <a href="mailto:chewys96@gmail.com" className="text-accent">chewys96@gmail.com</a> directly.
+                    </p>
+                  )}
                 </div>
               </form>
             </div>
