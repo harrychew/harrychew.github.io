@@ -15,10 +15,10 @@ const stats = [
 
 const certifications = [
   { code: 'OSWE', issuer: 'OffSec', badge: '/badges/oswe.png', plate: 'bg-white' },
+  { code: 'OSCP', issuer: 'OffSec', badge: '/badges/oscp.png', plate: 'bg-white' },
   { code: 'OSWP', issuer: 'OffSec', badge: '/badges/oswp.png', plate: 'bg-white' },
   { code: 'CARTP', issuer: 'Altered Security', badge: '/badges/cartp.png', plate: 'bg-console-bg' },
   { code: 'CRTP', issuer: 'Altered Security', badge: '/badges/crtp.png', plate: 'bg-console-bg' },
-  { code: 'OSCP', issuer: 'OffSec', badge: '/badges/oscp.png', plate: 'bg-white' },
   { code: 'PNPT', issuer: 'TCM Security', badge: '/badges/pnpt.png', plate: 'bg-console-bg' },
   { code: 'eCIR', issuer: 'INE Security', badge: '/badges/ecir.png', plate: 'bg-[#121212]' },
 ];
