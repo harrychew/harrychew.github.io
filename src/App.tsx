@@ -7,13 +7,14 @@ const IEEE_URL = 'https://ieeexplore.ieee.org/document/9166229';
 
 const stats = [
   { value: '6+', label: 'years in security' },
-  { value: '6', label: 'hands-on certifications' },
+  { value: '7', label: 'hands-on certifications' },
   { value: '25+', label: 'critical and high-severity findings' },
   { value: '500K+', label: 'customer accounts affected by critical findings' },
   { value: '13+', label: 'business divisions in testing scope' },
 ];
 
 const certifications = [
+  { code: 'OSWE', issuer: 'OffSec', badge: '/badges/oswe.png', plate: 'bg-white' },
   { code: 'OSWP', issuer: 'OffSec', badge: '/badges/oswp.png', plate: 'bg-white' },
   { code: 'CARTP', issuer: 'Altered Security', badge: '/badges/cartp.png', plate: 'bg-console-bg' },
   { code: 'CRTP', issuer: 'Altered Security', badge: '/badges/crtp.png', plate: 'bg-console-bg' },
@@ -75,8 +76,8 @@ const capabilities: Capability[] = [
   {
     id: 'appsec',
     name: 'Web, API, mobile and thick client',
-    credentials: [{ code: 'Field-earned', note: 'Proven through client and internal testing' }],
-    skills: ['Burp Suite', 'SQLMap', 'Nuclei', 'Custom Frida scripts', 'Root and SSL pinning bypass', 'MobSF', 'Ghidra', 'Echo Mirage'],
+    credentials: [{ code: 'OSWE', note: 'OffSec, Nov 2026' }],
+    skills: ['Source code review', 'Burp Suite', 'SQLMap', 'Nuclei', 'Custom Frida scripts', 'Root and SSL pinning bypass', 'MobSF', 'Ghidra', 'Echo Mirage'],
     impact: [
       { value: '25+', label: 'critical and high-severity vulnerabilities, including remote code execution' },
       { value: '+40%', label: 'in-house mobile testing capability after training an 8-person team' },
@@ -261,7 +262,7 @@ const Impact = () => {
       <Prompt>$ trace --skill-to-impact</Prompt>
       <SectionHeading>From credential to result.</SectionHeading>
       <p className="mb-8 mt-3 max-w-[640px] text-console-soft">
-        Pick a capability to trace the proof behind it. Every credential links to its public verification page.
+        Pick a capability to trace the proof behind it. Credentials link to their public verification pages.
       </p>
 
       <div className="flex flex-wrap items-stretch gap-4">
