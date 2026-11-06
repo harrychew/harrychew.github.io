@@ -207,27 +207,47 @@ const Stats = () => (
   </section>
 );
 
-const CertificationCards = () => (
+const BadgePlate = ({ code, className }: { code: string; className: string }) => {
+  const certification = certifications.find((item) => item.code === code);
+  if (!certification) {
+    return <span aria-hidden="true" className={`shrink-0 border border-dashed border-console-edge ${className}`} />;
+  }
+  return (
+    <span className={`shrink-0 overflow-hidden ${certification.plate} ${className}`}>
+      <img src={certification.badge} alt="" className="block h-full w-full object-contain" />
+    </span>
+  );
+};
+
+type PickCertification = (code: string) => void;
+
+const CertificationCards = ({ onPick, hidden = false }: { onPick: PickCertification; hidden?: boolean }) => (
   <>
     {certifications.map((certification) => (
-      <li key={certification.code} className="flex w-[204px] shrink-0 items-center gap-3 border border-console-line bg-console-panel p-2.5 pr-4">
-        <span className={`h-16 w-[72px] shrink-0 overflow-hidden ${certification.plate}`}>
-          <img src={certification.badge} alt={`${certification.code} badge`} className="block h-full w-full object-contain" />
-        </span>
-        <span className="min-w-0">
-          <span className="block font-mono font-semibold leading-tight">{certification.code}</span>
-          <span className="block truncate text-[13px] text-console-muted">{certification.issuer}</span>
-        </span>
+      <li key={certification.code} className="shrink-0">
+        <button
+          type="button"
+          tabIndex={hidden ? -1 : undefined}
+          onClick={() => onPick(certification.code)}
+          aria-label={hidden ? undefined : `${certification.code}, ${certification.issuer}: show in the impact map`}
+          className="flex w-[204px] items-center gap-3 border border-console-line bg-console-panel p-2.5 pr-4 text-left text-console-text hover:border-console-amber"
+        >
+          <BadgePlate code={certification.code} className="h-16 w-[72px]" />
+          <span className="min-w-0">
+            <span className="block font-mono font-semibold leading-tight">{certification.code}</span>
+            <span className="block truncate text-[13px] text-console-muted">{certification.issuer}</span>
+          </span>
+        </button>
       </li>
     ))}
   </>
 );
 
-const CertificationTrain = () => (
+const CertificationTrain = ({ onPick }: { onPick: PickCertification }) => (
   <section aria-label="Certifications" className="cert-train-window mt-10 overflow-hidden">
     <div className="cert-train flex w-max">
-      <ul className="m-0 flex list-none gap-3 p-0 pr-3"><CertificationCards /></ul>
-      <ul aria-hidden="true" className="cert-train-copy m-0 flex list-none gap-3 p-0 pr-3"><CertificationCards /></ul>
+      <ul className="m-0 flex list-none gap-3 p-0 pr-3"><CertificationCards onPick={onPick} /></ul>
+      <ul aria-hidden="true" className="cert-train-copy m-0 flex list-none gap-3 p-0 pr-3"><CertificationCards onPick={onPick} hidden /></ul>
     </div>
   </section>
 );
@@ -253,8 +273,7 @@ const ColumnLabel = ({ children, accent = false }: { children: string; accent?: 
   <p className={`mb-3.5 font-mono text-[13px] ${accent ? 'text-console-amber' : 'text-console-muted'}`}>{children}</p>
 );
 
-const Impact = () => {
-  const [pickedId, setPickedId] = useState(capabilities[0].id);
+const Impact = ({ pickedId, setPickedId }: { pickedId: string; setPickedId: (id: string) => void }) => {
   const picked = capabilities.find((capability) => capability.id === pickedId) ?? capabilities[0];
 
   return (
@@ -262,7 +281,7 @@ const Impact = () => {
       <Prompt>$ trace --skill-to-impact</Prompt>
       <SectionHeading>From credential to result.</SectionHeading>
       <p className="mb-8 mt-3 max-w-[640px] text-console-soft">
-        Pick a capability to trace the proof behind it. Credentials link to their public verification pages.
+        Pick a capability, or a badge above, to trace the proof behind it.
       </p>
 
       <div className="flex flex-wrap items-stretch gap-4">
@@ -291,13 +310,17 @@ const Impact = () => {
           <div className="bg-console-panel p-[22px]">
             <ColumnLabel>01 / CREDENTIALS</ColumnLabel>
             {picked.credentials.map((credential) => (
-              <div key={credential.code} className="border-t border-console-line py-2">
-                <p className="font-mono font-semibold">
-                  {credential.url ? (
-                    <a href={credential.url} target="_blank" rel="noopener noreferrer" aria-label={`Verify ${credential.code}`}>{credential.code}</a>
-                  ) : credential.code}
-                </p>
-                <p className="text-sm leading-[1.4] text-console-muted">{credential.note}</p>
+              <div key={credential.code} className="flex items-center gap-3 border-t border-console-line py-2.5">
+                <BadgePlate code={credential.code} className="h-12 w-11" />
+                <div className="min-w-0">
+                  <p className="font-mono font-semibold text-console-text">{credential.code}</p>
+                  <p className="text-sm leading-[1.4] text-console-muted">{credential.note}</p>
+                  {credential.url && (
+                    <a href={credential.url} target="_blank" rel="noopener noreferrer" aria-label={`Verify ${credential.code}`} className="font-mono text-[13px]">
+                      verify ↗
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -386,15 +409,24 @@ const Contact = () => (
 );
 
 function App() {
+  const [pickedId, setPickedId] = useState(capabilities[0].id);
+
+  const showCertification = (code: string) => {
+    const capability = capabilities.find((item) => item.credentials.some((credential) => credential.code === code));
+    if (!capability) return;
+    setPickedId(capability.id);
+    document.getElementById('impact')?.scrollIntoView({ block: 'start' });
+  };
+
   return (
     <div className="min-h-screen bg-console-bg text-console-text">
       <Header />
       <main id="top" className="mx-auto max-w-[1180px] px-6">
         <Hero />
         <Stats />
-        <CertificationTrain />
+        <CertificationTrain onPick={showCertification} />
         <Career />
-        <Impact />
+        <Impact pickedId={pickedId} setPickedId={setPickedId} />
         <Value />
         <Background />
         <Contact />
